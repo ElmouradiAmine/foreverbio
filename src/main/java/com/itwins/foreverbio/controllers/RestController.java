@@ -32,7 +32,7 @@ public class RestController {
 	}
 
 	@GetMapping("/about")
-	public String home() {
+	public String about() {
 		return "This is the about page";
 	}
 
