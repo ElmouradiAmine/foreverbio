@@ -1,5 +1,7 @@
 package com.itwins.foreverbio.models;
 
+import java.util.Map;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -19,7 +21,14 @@ public class User {
 	
 	
 	
-	
+	public User(Map<String,Object> userMap) {
+		super();
+		this.email = (String) userMap.get("email");
+		this.firstname = (String) userMap.get("firstname");
+		this.lastname = (String) userMap.get("lastname");
+		this.age = (int) userMap.get("age");
+		this.password = (String) userMap.get("password");
+	}
 	
 	public User(String email, String firstname, String lastname, int age, String password) {
 		super();
