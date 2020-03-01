@@ -1,7 +1,12 @@
 package com.itwins.foreverbio.controllers;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwins.foreverbio.models.User;
@@ -23,13 +28,35 @@ public class RestController {
 		return "home";
 	}
 
-	@GetMapping("/save-user")
-	public String saveUser(@RequestParam String email, @RequestParam String firstname, @RequestParam String lastname,
-			@RequestParam int age, @RequestParam String password) {
-		User user = new User(email, firstname, lastname, age, password);
+	
+	/*This method take as an argument a json and it's the body of the
+	 * http request then it creates the user object out of it
+	 * and then puts it into the databse.
+	 * for the request body response , we have a json also with the status
+	 * code and the description.
+	 * 
+	 * The json should be in this format :
+	 * 	{
+			"email": "ahmedbougern998@gmail.com",
+			"firstname": "Amine",
+			"lastname": "Elmouradi",
+			"age": 21,
+			"password": "hello world 123"
+		}
+	 * 
+	 * 
+	 */
+	
+	@PostMapping("/addUser")
+	public String addUser(@RequestBody Map<String, Object> userMap) {
+		User user = new User(userMap);
 		userService.saveUser(user);
-		return "User saved successfully";
+		return "{"
+				+ "\"statusCode\": 1,"
+				+ "\"description\": \"User saved successfully.\""
+				+ "}";
 	}
+	
 
 	@GetMapping("/about")
 	public String about() {
