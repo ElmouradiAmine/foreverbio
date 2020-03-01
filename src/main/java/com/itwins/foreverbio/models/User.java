@@ -19,6 +19,9 @@ public class User {
 	private int age;
 	private String password;
 	
+	public User() {
+		super();
+	}
 	
 	
 	public User(Map<String,Object> userMap) {
