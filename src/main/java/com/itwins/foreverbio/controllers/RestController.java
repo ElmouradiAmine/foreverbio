@@ -16,7 +16,7 @@ public class RestController {
 	
 	@GetMapping("/")
 	public String index() {
-		return "hello world";
+		return "Welcome Page";
 	}
 
 	@GetMapping("/home")
