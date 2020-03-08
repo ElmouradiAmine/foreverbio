@@ -40,4 +40,11 @@ public class UserService {
 		}
 		return true;
 	}
+	
+	public User findUser(int id) {
+		
+			return userRepository.findById(id);
+		
+	}
+	
 }

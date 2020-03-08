@@ -97,7 +97,21 @@ public class UserController {
 
 		return "{" + "\"statusCode\": 0,"
 				+ "\"description\": \"An error has occured. The id request might no exist in the db.\"" + "}";
-
 	}
+	
+	@GetMapping("User/{id}")
+	public String getUser(@PathVariable int id) {
+		User user = userService.findUser(id);
+		if (user == null) {
+			return "{" + "\"statusCode\": 0,"
+					+ "\"description\": \"An error has occured. The id request might no exist in the db.\"" + "}";		}
+
+	
+		return "{" + "\"statusCode\": 1," + "\"description\": \"User found !\"," + "\"id\": \""
+		+ user.getId() + "\"," + "\"email\": \"" + user.getEmail() + "\"," + "\"firstname\": \""
+		+ user.getFirstName() + "\"," + "\"lastname\": \"" + user.getLastName() + "\"," + "\"age\": "
+		+ user.getAge() + "" + "}";
+	}
+	
 
 }
