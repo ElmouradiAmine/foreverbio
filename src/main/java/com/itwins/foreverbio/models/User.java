@@ -26,6 +26,7 @@ public class User {
 	
 	public User(Map<String,Object> userMap) {
 		super();
+		this.id =(int) userMap.get("id");
 		this.email = (String) userMap.get("email");
 		this.firstname = (String) userMap.get("firstname");
 		this.lastname = (String) userMap.get("lastname");
@@ -79,10 +80,11 @@ public class User {
 	}
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", firstName=" + firstname + ", lastName=" + lastname + ", age="
-				+ age + ", password=" + password + "]";
+		return "{\"id\":"+ id + ", \"email\": \"" + email + "\", \"firstName\": \"" + firstname + "\", \"lastName\":\"" + lastname + "\", \"age\":"
+				+ age + ", \"password\":\"" + password + "\"}";
 	}
 	
+
 	
 	
 	
