@@ -1,5 +1,7 @@
 package com.itwins.foreverbio.services;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
@@ -26,4 +28,16 @@ public class UserService {
 		return userRepository.findByEmailAndPassword(email, password);
 	}
 
+	public List<User> findAllUsers() {
+		return (List<User>) userRepository.findAll();
+	}
+	
+	public boolean deleteUser(int id) {
+		try {
+			userRepository.deleteById(id);
+		} catch(Exception ex) {
+			return false;
+		}
+		return true;
+	}
 }
