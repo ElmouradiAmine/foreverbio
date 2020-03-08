@@ -12,18 +12,17 @@ import com.itwins.foreverbio.repository.UserRepository;
 @Service
 @Transactional
 public class UserService {
-	
+
 	private final UserRepository userRepository;
-	
-	
+
 	public UserService(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
-	
+
 	public void saveUser(User user) {
 		userRepository.save(user);
 	}
-	
+
 	public User findUserByEmailAndPassword(String email, String password) {
 		return userRepository.findByEmailAndPassword(email, password);
 	}
@@ -31,20 +30,25 @@ public class UserService {
 	public List<User> findAllUsers() {
 		return (List<User>) userRepository.findAll();
 	}
-	
+
 	public boolean deleteUser(int id) {
 		try {
 			userRepository.deleteById(id);
-		} catch(Exception ex) {
+		} catch (Exception ex) {
 			return false;
 		}
 		return true;
 	}
-	
+
 	public User findUser(int id) {
-		
-			return userRepository.findById(id);
-		
+
+		return userRepository.findById(id);
+
 	}
 	
+	public void updateUser(User user) {
+		deleteUser(user.getId());
+		userRepository.save(user);
+	}
+
 }

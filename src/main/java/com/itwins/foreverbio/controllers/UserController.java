@@ -113,5 +113,16 @@ public class UserController {
 		+ user.getAge() + "" + "}";
 	}
 	
+	
+	@PostMapping("User/edit")
+	public String editUser(@RequestBody Map<String, Object> userMap) {
+		User user = new User(userMap);
+		userService.saveUser(user);
+		return "{" + "\"statusCode\": 1," + "\"description\": \"User updated successfully.\"" + "}";
+
+	}
+	
+	
+	
 
 }
