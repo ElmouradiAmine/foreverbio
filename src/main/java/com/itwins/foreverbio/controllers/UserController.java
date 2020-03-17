@@ -25,6 +25,13 @@ public class UserController {
 			return userService.findAll();
 		}
 		return userService.findByEmailContaining(searchText);
+
+	}
+
+	@GetMapping("/user/{id}")
+	public Optional<User> userById(@PathVariable String id) {
+		int userId = Integer.parseInt(id);
+		return userService.findById(userId);
 	}
 
 	// ! @route POST /user
@@ -65,6 +72,7 @@ public class UserController {
 		}
 		return null;
 	}
+
 
 	// ! @route DELETE /user/id
 	// ! @desc deletes user with param id
