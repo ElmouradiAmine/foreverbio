@@ -14,10 +14,11 @@ public class User {
 	@Id
 	private int id;
 	private String email;
-	private String firstname;
-	private String lastname;
+	private String firstName;
+	private String lastName;
 	private int age;
 	private String password;
+	private String role;
 	
 	public User() {
 		super();
@@ -30,20 +31,26 @@ public class User {
 		
 		this.id = (int )userMap.get("id");
 		this.email = (String) userMap.get("email");
-		this.firstname = (String) userMap.get("firstname");
-		this.lastname = (String) userMap.get("lastname");
+		this.firstName = (String) userMap.get("firstname");
+		this.lastName = (String) userMap.get("lastname");
 		this.age = (int) userMap.get("age");
 		this.password = (String) userMap.get("password");
+		this.role = (String) userMap.get("role");
 	}
 	
 	public User(String email, String firstname, String lastname, int age, String password) {
 		super();
 		this.email = email;
-		this.firstname = firstname;
-		this.lastname = lastname;
+		this.firstName = firstname;
+		this.lastName = lastname;
 		this.age = age;
 		this.password = password;
 	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -57,16 +64,16 @@ public class User {
 		this.email = email;
 	}
 	public String getFirstName() {
-		return firstname;
+		return firstName;
 	}
 	public void setFirstName(String firstName) {
-		this.firstname = firstName;
+		this.firstName = firstName;
 	}
 	public String getLastName() {
-		return lastname;
+		return lastName;
 	}
 	public void setLastName(String lastName) {
-		this.lastname = lastName;
+		this.lastName = lastName;
 	}
 	public int getAge() {
 		return age;
@@ -82,12 +89,12 @@ public class User {
 	}
 	@Override
 	public String toString() {
-		return "{\"id\":"+ id + ", \"email\": \"" + email + "\", \"firstName\": \"" + firstname + "\", \"lastName\":\"" + lastname + "\", \"age\":"
+		return "{\"id\":"+ id + ", \"email\": \"" + email + "\", \"firstName\": \"" + firstName + "\", \"lastName\":\"" + lastName + "\", \"age\":"
 				+ age + ", \"password\":\"" + password + "\"}";
 	}
-	
 
-	
-	
-	
+
+	public String getRole() {
+		return role;
+	}
 }
