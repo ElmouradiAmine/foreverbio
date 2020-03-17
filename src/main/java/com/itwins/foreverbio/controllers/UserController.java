@@ -25,6 +25,7 @@ public class UserController {
 			return userService.findAll();
 		}
 		return userService.findByEmailContaining(searchText);
+
 	}
 
 	@GetMapping("/user/{id}")
@@ -71,6 +72,7 @@ public class UserController {
 		}
 		return null;
 	}
+
 
 	// ! @route DELETE /user/id
 	// ! @desc deletes user with param id
