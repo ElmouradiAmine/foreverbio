@@ -1,6 +1,7 @@
 package com.itwins.foreverbio.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -19,19 +20,19 @@ public class UserService {
 		this.userRepository = userRepository;
 	}
 
-	public void saveUser(User user) {
-		userRepository.save(user);
+	public User saveUser(User user) {
+		return userRepository.save(user);
 	}
 
-	public User findUserByEmailAndPassword(String email, String password) {
+	public Optional<User> findUserByEmailAndPassword(String email, String password) {
 		return userRepository.findByEmailAndPassword(email, password);
 	}
 
-	public List<User> findAllUsers() {
-		return (List<User>) userRepository.findAll();
+	public List<User> findAll() {
+		return  userRepository.findAll();
 	}
 
-	public boolean deleteUser(int id) {
+	public boolean deleteById(int id) {
 		try {
 			userRepository.deleteById(id);
 		} catch (Exception ex) {
@@ -40,15 +41,15 @@ public class UserService {
 		return true;
 	}
 
-	public User findUser(int id) {
+	public Optional<User> findById(int id) {
 
 		return userRepository.findById(id);
 
 	}
 	
-	public void updateUser(User user) {
-		deleteUser(user.getId());
-		userRepository.save(user);
+
+	public List<User> findByEmailContaining(String email) {
+		return userRepository.findByEmailContaining(email);
 	}
 
 }

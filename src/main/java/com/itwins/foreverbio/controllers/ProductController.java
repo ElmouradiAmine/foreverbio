@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.itwins.foreverbio.services.ProductService;
 
 import com.itwins.foreverbio.models.Product;
+import org.springframework.web.bind.annotation.RestController;
 
-@org.springframework.web.bind.annotation.RestController
+
+@RestController
 public class ProductController {
 
     @Autowired
