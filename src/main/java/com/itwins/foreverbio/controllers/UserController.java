@@ -27,6 +27,12 @@ public class UserController {
 		return userService.findByEmailContaining(searchText);
 	}
 
+	@GetMapping("/user/{id}")
+	public Optional<User> userById(@PathVariable String id) {
+		int userId = Integer.parseInt(id);
+		return userService.findById(userId);
+	}
+
 	// ! @route POST /user
 	// ! @desc create a new user in database. Body parameters needed :
 	// email, firstname, lastname, age, password, role
