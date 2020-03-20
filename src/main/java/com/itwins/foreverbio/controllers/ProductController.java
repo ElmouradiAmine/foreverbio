@@ -82,7 +82,8 @@ public class ProductController {
     // ! @desc modifies product in database. Body parameters needed :
     // id, nom,description, source, etat, prix, qte
     // ! @access public (for now- it should be accessible by admins only)
-    @PutMapping("/product/{id}")
+    @PutMapping("/product/{" +
+            "}")
     public Product update(@PathVariable String id, @RequestBody Map<String, String> body) {
         int productId = Integer.parseInt(id);
         Optional<Product> product = productService.findById(productId);
