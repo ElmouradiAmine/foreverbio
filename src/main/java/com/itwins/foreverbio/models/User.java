@@ -31,8 +31,8 @@ public class User {
 		
 		this.id = (int )userMap.get("id");
 		this.email = (String) userMap.get("email");
-		this.firstName = (String) userMap.get("firstname");
-		this.lastName = (String) userMap.get("lastname");
+		this.firstName = (String) userMap.get("firstName");
+		this.lastName = (String) userMap.get("lastName");
 		this.age = (int) userMap.get("age");
 		this.password = (String) userMap.get("password");
 		this.role = (String) userMap.get("role");
