@@ -13,6 +13,7 @@ import com.itwins.foreverbio.services.UserService;
 @RestController
 public class UserController {
 
+
 	@Autowired
 	private UserService userService;
 
@@ -33,7 +34,6 @@ public class UserController {
 		int userId = Integer.parseInt(id);
 		return userService.findById(userId);
 	}
-
 	// ! @route POST /user
 	// ! @desc create a new user in database. Body parameters needed :
 	// email, firstname, lastname, age, password, role
@@ -46,11 +46,6 @@ public class UserController {
 
 	}
 
-	@PostMapping("/user/login")
-	public Optional<User> login(@RequestBody Map<String, Object> userMap) {
-		return userService.findUserByEmailAndPassword((String)userMap.get("email"),(String)userMap.get("password"));
-
-	}
 
 	// ! @route PUT /user/id
 	// ! @desc modifies user in database. Body parameters needed :
@@ -81,6 +76,17 @@ public class UserController {
 	public boolean delete(@PathVariable String id) {
 		int userId = Integer.parseInt(id);
 		return userService.deleteById(userId);
+	}
+
+	@PostMapping("/signIn")
+	public String signIn(@RequestBody Map<String, Object> userInfo) {
+		Optional<User> user = userService.findUserByEmailAndPassword(userInfo.get("email").toString(),
+				userInfo.get("password").toString());
+		if (user.isPresent()) {
+			return "authentification réussite";
+		}
+		return "email or password not correct";
+
 	}
 
 
