@@ -1,15 +1,17 @@
 package com.itwins.foreverbio.models;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.Map;
 
 @Entity
-@Table(name="categorie")
-public class Category {
 
-    @Id
+public class Category implements Serializable {
+
+    @Id @GeneratedValue
     private int id;
     private String nom;
 
@@ -29,14 +31,6 @@ public class Category {
 
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getNom() {
         return nom;
     }
@@ -45,6 +39,9 @@ public class Category {
         this.nom = nom;
     }
 
+    public int getId() {
+        return id;
+    }
 
     @Override
     public String toString() {
