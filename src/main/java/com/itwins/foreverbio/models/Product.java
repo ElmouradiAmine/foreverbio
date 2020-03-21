@@ -9,6 +9,7 @@ import javax.persistence.Table;
 public class Product {
 	@Id
 	private int id;
+	private int idCat;
 	private String nom;
 	private String description;
 	String source;
@@ -20,9 +21,10 @@ public class Product {
 		
 	}
 
-	public Product(int id, String nom, String description, String source, String etat, double prix, int qte) {
+	public Product(int id, int idCat, String nom, String description, String source, String etat, double prix, int qte) {
 		super();
 		this.setId(id);
+		this.setId(idCat);
 		this.setNom(nom);
 		this.setDescription(description);
 		this.setSource(source);
@@ -37,6 +39,15 @@ public class Product {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	
+	public int getIdCat() {
+		return idCat;
+	}
+
+	public void setIdCat(int idCat) {
+		this.idCat = idCat;
 	}
 
 	public String getNom() {
@@ -89,9 +100,11 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", nom=" + nom + ", description=" + description + ", source=" + source + ", etat="
-				+ etat + ", prix=" + prix + ", qte=" + qte + "]";
+		return "Product [id=" + id + ", idCat=" + idCat + ", nom=" + nom + ", description=" + description + ", source="
+				+ source + ", etat=" + etat + ", prix=" + prix + ", qte=" + qte + "]";
 	}
+
+
 	
 	
 	
