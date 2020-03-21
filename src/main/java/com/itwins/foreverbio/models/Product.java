@@ -1,5 +1,6 @@
 package com.itwins.foreverbio.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -9,6 +10,8 @@ import javax.persistence.Table;
 public class Product {
 	@Id
 	private int id;
+	@Column(name="id_cat")
+	private int idCat;
 	private String nom;
 	private String description;
 	String source;
@@ -20,9 +23,10 @@ public class Product {
 		
 	}
 
-	public Product(int id, String nom, String description, String source, String etat, double prix, int qte) {
+	public Product(int id, int idCat, String nom, String description, String source, String etat, double prix, int qte) {
 		super();
 		this.setId(id);
+		this.setIdCat(idCat);
 		this.setNom(nom);
 		this.setDescription(description);
 		this.setSource(source);
@@ -37,6 +41,15 @@ public class Product {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	
+	public int getIdCat() {
+		return idCat;
+	}
+
+	public void setIdCat(int idCat) {
+		this.idCat = idCat;
 	}
 
 	public String getNom() {
@@ -89,9 +102,11 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", nom=" + nom + ", description=" + description + ", source=" + source + ", etat="
-				+ etat + ", prix=" + prix + ", qte=" + qte + "]";
+		return "Product [id=" + id + ", idCat=" + idCat + ", nom=" + nom + ", description=" + description + ", source="
+				+ source + ", etat=" + etat + ", prix=" + prix + ", qte=" + qte + "]";
 	}
+
+
 	
 	
 	
