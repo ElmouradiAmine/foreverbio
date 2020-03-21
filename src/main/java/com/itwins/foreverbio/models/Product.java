@@ -1,5 +1,6 @@
 package com.itwins.foreverbio.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -9,6 +10,7 @@ import javax.persistence.Table;
 public class Product {
 	@Id
 	private int id;
+	@Column(name="id_cat")
 	private int idCat;
 	private String nom;
 	private String description;
@@ -24,7 +26,7 @@ public class Product {
 	public Product(int id, int idCat, String nom, String description, String source, String etat, double prix, int qte) {
 		super();
 		this.setId(id);
-		this.setId(idCat);
+		this.setIdCat(idCat);
 		this.setNom(nom);
 		this.setDescription(description);
 		this.setSource(source);
