@@ -70,8 +70,7 @@ public class ProductController {
     // ! @access public (for now- it should be accessible by admins only)
     @CrossOrigin()
     @PostMapping("/product")
-    public Product create(@RequestBody Map<String, String> body) {
-        int id = Integer.parseInt(body.get("id"));
+    public String create(@RequestBody Map<String, String> body) {
         int idCat = Integer.parseInt(body.get("idCat"));
         String nom = body.get("nom");
         String description = body.get("description");
@@ -81,7 +80,8 @@ public class ProductController {
         int qte = Integer.parseInt(body.get("qte"));
         String url = body.get("url");
 
-        return productService.saveProduct(new Product(id, idCat, nom, description, source, etat, prix, qte, url));
+        productService.saveProduct(new Product(idCat, nom, description, source, etat, prix, qte, url));
+        return ("Produit ajouté.");
     }
 
     // ! @route PUT /product/id

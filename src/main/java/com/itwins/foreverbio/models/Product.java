@@ -24,7 +24,7 @@ public class Product {
 
 	}
 
-	public Product(int id, int idCat, String nom, String description, String source, String etat, double prix, int qte,
+	public Product(int idCat, String nom, String description, String source, String etat, double prix, int qte,
 			String url) {
 		super();
 		this.setId(id);
