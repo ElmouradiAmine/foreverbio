@@ -75,8 +75,9 @@ public class ProductController {
         String etat = body.get("etat");
         double prix = Double.parseDouble(body.get("prix"));
         int qte = Integer.parseInt(body.get("qte"));
+        String url = body.get("url");
 
-        return productService.saveProduct(new Product(id, idCat, nom, description, source, etat, prix, qte));
+        return productService.saveProduct(new Product(id, idCat, nom, description, source, etat, prix, qte, url));
     }
 
     // ! @route PUT /product/id
@@ -96,6 +97,7 @@ public class ProductController {
             p.setEtat(body.get("etat"));
             p.setPrix(Double.parseDouble(body.get("prix")));
             p.setQte(Integer.parseInt(body.get("qte")));
+            p.setUrl(body.get("url"));
 
             return productService.saveProduct(p);
         }
