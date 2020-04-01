@@ -6,11 +6,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="products")
+@Table(name = "products")
 public class Product {
 	@Id
 	private int id;
-	@Column(name="id_cat")
+	@Column(name = "id_cat")
 	private int idCat;
 	private String nom;
 	private String description;
@@ -18,12 +18,14 @@ public class Product {
 	String etat;
 	double prix;
 	int qte;
-	
+	String url;
+
 	public Product() {
-		
+
 	}
 
-	public Product(int id, int idCat, String nom, String description, String source, String etat, double prix, int qte) {
+	public Product(int idCat, String nom, String description, String source, String etat, double prix, int qte,
+			String url) {
 		super();
 		this.setId(id);
 		this.setIdCat(idCat);
@@ -33,6 +35,7 @@ public class Product {
 		this.setEtat(etat);
 		this.setPrix(prix);
 		this.setQte(qte);
+		this.setUrl(url);
 	}
 
 	public int getId() {
@@ -43,7 +46,6 @@ public class Product {
 		this.id = id;
 	}
 
-	
 	public int getIdCat() {
 		return idCat;
 	}
@@ -100,17 +102,20 @@ public class Product {
 		this.qte = qte;
 	}
 
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", idCat=" + idCat + ", nom=" + nom + ", description=" + description + ", source="
-				+ source + ", etat=" + etat + ", prix=" + prix + ", qte=" + qte + "]";
+				+ source + ", etat=" + etat + ", prix=" + prix + ", qte=" + qte + ", url=" + url + "]";
 	}
 
 
 	
-	
-	
-	
-	
-
 }
