@@ -71,7 +71,7 @@ public class ProductController {
     @CrossOrigin()
     @PostMapping("/product")
 
-    public Product create(@RequestBody Map<String, String> body) {
+    public String create(@RequestBody Map<String, String> body) {
         int id = Integer.parseInt(body.get("id"));
         int idCat = Integer.parseInt(body.get("idCat"));
         String nom = body.get("nom");
