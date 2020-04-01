@@ -70,7 +70,9 @@ public class ProductController {
     // ! @access public (for now- it should be accessible by admins only)
     @CrossOrigin()
     @PostMapping("/product")
-    public String create(@RequestBody Map<String, String> body) {
+
+    public Product create(@RequestBody Map<String, String> body) {
+        int id = Integer.parseInt(body.get("id"));
         int idCat = Integer.parseInt(body.get("idCat"));
         String nom = body.get("nom");
         String description = body.get("description");
@@ -82,12 +84,14 @@ public class ProductController {
 
         productService.saveProduct(new Product(idCat, nom, description, source, etat, prix, qte, url));
         return ("Produit ajouté.");
+
     }
 
     // ! @route PUT /product/id
     // ! @desc modifies product in database. Body parameters needed :
     // id, nom,description, source, etat, prix, qte
     // ! @access public (for now- it should be accessible by admins only)
+
     @CrossOrigin()
     @PutMapping("/product/{id}")
     public Product update(@PathVariable String id, @RequestBody Map<String, String> body) {

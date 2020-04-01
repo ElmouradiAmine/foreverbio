@@ -116,4 +116,6 @@ public class Product {
 				+ source + ", etat=" + etat + ", prix=" + prix + ", qte=" + qte + ", url=" + url + "]";
 	}
 
+
+	
 }
