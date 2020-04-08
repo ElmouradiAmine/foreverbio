@@ -1,6 +1,7 @@
 package com.itwins.foreverbio.models;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -15,20 +16,22 @@ public class Product {
 	String etat;
 	double prix;
 	int qte;
+	int idCat;
 	
 	public Product() {
 		
 	}
 
-	public Product(int id, String nom, String description, String source, String etat, double prix, int qte) {
+	public Product(int id, String nom, String description, String source, String etat, double prix, int qte, int idCat) {
 		super();
-		this.setId(id);
+		this.id=id;
 		this.setNom(nom);
 		this.setDescription(description);
 		this.setSource(source);
 		this.setEtat(etat);
 		this.setPrix(prix);
 		this.setQte(qte);
+		this.setIdCat(idCat);
 	}
 
 	public int getId() {
@@ -87,6 +90,13 @@ public class Product {
 		this.qte = qte;
 	}
 
+	public int getIdCat() {
+		return idCat;
+	}
+
+	public void setIdCat(int idCat) {
+		this.idCat = idCat;
+	}
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", nom=" + nom + ", description=" + description + ", source=" + source + ", etat="

@@ -5,38 +5,35 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.itwins.foreverbio.services.ProductService;
 
 import com.itwins.foreverbio.models.Product;
 
-@org.springframework.web.bind.annotation.RestController
+@RestController
 public class ProductController {
 
     @Autowired
     private ProductService productService;
 
-    // ! @route GET /product
-    // ! @desc shows all products in mysql database
-    // ! @access public
+
     @GetMapping("/product")
     public List<Product> index() {
         return productService.findAll();
     }
 
-    // ! @route GET /product/id
-    // ! @desc finds and shows product with parameter id
-    // ! @access public
+
     @GetMapping("/product/{id}")
     public Optional<Product> show(@PathVariable String id) {
         int productId = Integer.parseInt(id);
         return productService.findById(productId);
+    }
+
+    @GetMapping("/products/{idCat}")
+    public List<Product> showAll(@PathVariable("idCat") int idCat) {
+        return productService.findProductByIdCat(idCat);
+        //return productService.findAll();
     }
 
     // ! @route POST /product/search
@@ -49,20 +46,7 @@ public class ProductController {
         return productService.findByNomContainingOrDescriptionContaining(searchTerm, searchTerm);
     }
 
-    // ! @route POST /product
-    // ! @desc adds product in database. Body parameters needed :
-    // id, nom, description, source, etat, prix, qte
-    // exemple :
-    // {
-    // "id":"5",
-    // "nom":"produit1",
-    // "description":"description produit1",
-    // "source":"source1",
-    // "etat":"vente",
-    // "prix":"100.00",
-    // "qte":"34"
-    // }
-    // ! @access public (for now- it should be accessible by admins only)
+
     @PostMapping("/product")
     public Product create(@RequestBody Map<String, String> body) {
         int id = Integer.parseInt(body.get("id"));
@@ -72,8 +56,9 @@ public class ProductController {
         String etat = body.get("etat");
         double prix = Double.parseDouble(body.get("prix"));
         int qte = Integer.parseInt(body.get("qte"));
+        int idCat = Integer.parseInt(body.get("idCat"));
 
-        return productService.saveProduct(new Product(id, nom, description, source, etat, prix, qte));
+        return productService.saveProduct(new Product(id, nom, description, source, etat, prix, qte,idCat));
     }
 
     // ! @route PUT /product/id

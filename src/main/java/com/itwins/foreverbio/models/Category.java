@@ -1,8 +1,9 @@
 package com.itwins.foreverbio.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.springframework.context.annotation.Lazy;
+
+import javax.persistence.*;
+import java.util.List;
 import java.util.Map;
 
 @Entity
@@ -10,29 +11,37 @@ import java.util.Map;
 public class Category {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String nom;
+    private String image;
+    private String description;
+
 
     public Category(){
     }
 
-    public Category(int id, String nom) {
-        this.id = id;
+    public Category(String nom, String image, String description) {
         this.nom = nom;
+        this.image = image;
+        this.description = description;
+
     }
+
     public Category(Map<String,Object> categoryMap) {
         super();
         if (categoryMap.get("id") != null)
 
-            this.id = (int )categoryMap.get("id");
-        this.nom = (String) categoryMap.get("nom");
+            this.id = Integer.parseInt((String )categoryMap.get("id"));
+            this.nom = (String) categoryMap.get("nom");
+            this.image = (String) categoryMap.get("image");
+            this.description = (String) categoryMap.get("description");
 
     }
 
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
@@ -40,9 +49,22 @@ public class Category {
     public String getNom() {
         return nom;
     }
-
-    public void setNom(String nom) {
+     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public String getImage() {
+        return image;
+    }
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+     public void setDescription(String description) {
+        this.description = description;
     }
 
 

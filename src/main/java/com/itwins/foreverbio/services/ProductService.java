@@ -16,8 +16,7 @@ import java.util.Optional;
 public class ProductService {
 	
 	private final ProductRepository productRepository;
-	
-	
+
 	public ProductService(ProductRepository productRepository) {
 		this.productRepository = productRepository;
 	}
@@ -41,5 +40,12 @@ public class ProductService {
 	public List<Product> findByNomContainingOrDescriptionContaining(String nom, String description) {
 		return productRepository.findByNomContainingOrDescriptionContaining(nom, description);
 	}
+//AH FHMT ! SAF WLITI SUPERWOMAN HHHHHH ACH BA9I  DAR M3AK AMINE ? Z3MA CHEF
+	//EWA SBRI NCHOFO 3MI GOOGLE T9LAB DIALK MACHI HWA DIALI
+	public List<Product> findProductByIdCat(int idCateg) {
+		return productRepository.findProductByIdCat(idCateg);
+	}
+
+
 	
 }

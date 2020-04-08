@@ -4,11 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.itwins.foreverbio.models.Category;
+import com.itwins.foreverbio.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.itwins.foreverbio.services.CategoryService;
 
@@ -16,39 +15,27 @@ import com.itwins.foreverbio.services.CategoryService;
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
-
+    @CrossOrigin("http://localhost:3000")
     @PostMapping("Category/add")
-    public String addCategory(@RequestBody Map<String, Object> categoryMap) {
+    public Category addCategory(@RequestBody Map<String, Object> categoryMap) {
         Category category = new Category(categoryMap);
-        categoryService.saveCategory(category);
+       // categoryService.saveCategory(category);
 
-        return "{" + "category saved successfully." + "}";
+        return categoryService.saveCategory(category);
     }
-
-    @PostMapping("Category/all")
-    public String findAllCategories() {
+    @CrossOrigin("http://localhost:3000")
+    @GetMapping("Category/all")
+    public List<Category> findAllCategories() {
         List<Category> categories = categoryService.findAllCategories();
         if (categories == null) {
-            return "{" + "An error has occured." + "}";
+            return null;
         }
+        return categories;
 
-        String jsonBody = "\"Categories\": [ ";
-        int i = 0;
-        for (Category category : categories) {
 
-            jsonBody += category.toString();
-            if (i != categories.size() - 1) {
-                jsonBody += ",";
-            }
-            i++;
-
-        }
-
-        jsonBody += "]";
-        return jsonBody;
     }
-
-    @GetMapping("Category/delete/{id}")
+    @CrossOrigin()
+    @DeleteMapping("Category/delete/{id}")
     public String deleteCategory(@PathVariable int id) {
 
         if (categoryService.deleteCategory(id)) {
@@ -57,28 +44,41 @@ public class CategoryController {
 
         return " An error has occured. ";
     }
-
+    @CrossOrigin()
     @GetMapping("Category/{id}")
-    public String getCategory(@PathVariable int id) {
+    public Category getCategory(@PathVariable int id) {
         Category category = categoryService.findCategory(id);
         if (category == null) {
-            return "An error has occured. ";		}
+            return null;		}
+        return category;
 
-
-        return "{ id\": \""
-                + category.getId() + "\"," + "\"libelle\": \"" + category.getNom() + "\"." ;
+//        return "{ id\": \""
+//                + category.getId() + "\"," + "\"libelle\": \"" + category.getNom() + "\"." ;
     }
 
+    @CrossOrigin()
+    @PutMapping("Category/edit/{id}")
+    public Category editCategory(@PathVariable int id,@RequestBody Map<String, Object> categoryMap) {
 
-    @PostMapping("Category/edit")
-    public String editCategory(@RequestBody Map<String, Object> categoryMap) {
-        Category user = new Category(categoryMap);
-        categoryService.saveCategory(user);
-        return "{" + "\"statusCode\": 1," + "\"description\": \"Catgory updated successfully.\"" + "}";
+        Category cat = categoryService.findCategory(id);// new Category(categoryMap);
+        cat.setNom((String) categoryMap.get("nom"));
+        cat.setImage((String) categoryMap.get("image"));
+        cat.setDescription((String) categoryMap.get("description"));
+        categoryService.saveCategory(cat);
+        return cat;
 
     }
 
+    /*@GetMapping("Category/{id}")
+    public Category getProducts(@PathVariable int id) {
+        Category category = categoryService.findCategory(id);
+        if (category == null) {
+            return null;
+        }
+        return category;
 
+
+    }*/
 
 
 }
