@@ -14,6 +14,7 @@ public class Product {
 	private int idCat;
 	private String nom;
 	private String description;
+	private String unit;
 	String source;
 	String etat;
 	double prix;
@@ -21,16 +22,15 @@ public class Product {
 	String url;
 
 	public Product() {
-
 	}
 
-	public Product(int idCat, String nom, String description, String source, String etat, double prix, int qte,
+	public Product(int idCat, String nom, String description, String unit, String source, String etat, double prix, int qte,
 			String url) {
 		super();
-		this.setId(id);
 		this.setIdCat(idCat);
 		this.setNom(nom);
 		this.setDescription(description);
+		this.setUnit(unit);
 		this.setSource(source);
 		this.setEtat(etat);
 		this.setPrix(prix);
@@ -68,6 +68,14 @@ public class Product {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
 	}
 
 	public String getSource() {
@@ -112,8 +120,11 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", idCat=" + idCat + ", nom=" + nom + ", description=" + description + ", source="
-				+ source + ", etat=" + etat + ", prix=" + prix + ", qte=" + qte + ", url=" + url + "]";
+		return "Product [id=" + id + ", idCat=" + idCat + ", nom=" + nom + ", description=" + description + ", unit="
+				+ unit + ", source=" + source + ", etat=" + etat + ", prix=" + prix + ", qte=" + qte + ", url=" + url
+				+ "]";
 	}
+
+	
 
 }
