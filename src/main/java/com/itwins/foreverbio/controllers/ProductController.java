@@ -72,7 +72,7 @@ public class ProductController {
     @PostMapping("/product")
 
     public String create(@RequestBody Map<String, String> body) {
-        int id = Integer.parseInt(body.get("id"));
+        //int id = Integer.parseInt(body.get("id"));
         int idCat = Integer.parseInt(body.get("idCat"));
         String nom = body.get("nom");
         String description = body.get("description");

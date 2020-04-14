@@ -42,14 +42,12 @@ public class UserService {
 	}
 
 	public Optional<User> findById(int id) {
-
 		return userRepository.findById(id);
-
 	}
 	
 
-	public List<User> findByEmailContaining(String email) {
-		return userRepository.findByEmailContaining(email);
+	public List<User> findBySearch(String searchText) {
+		return userRepository.findByEmailContainingOrFirstNameContainingOrLastNameContaining(searchText,searchText,searchText);
 	}
 
 }
