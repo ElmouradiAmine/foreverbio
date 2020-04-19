@@ -99,10 +99,10 @@ public class ProductController {
         Optional<Product> product = productService.findById(productId);
         if (product.isPresent()) {
             Product p = product.get();
-                      
-
-                p.setUnit(body.get("unit"));         p.setS        p.setEtat(body.get("
-
+            p.setUnit(body.get("unit"));    
+            p.setDescription(body.get("description"));
+            p.setSource(body.get("source"));        
+            p.setEtat(body.get("etat"));
             p.setPrix(Double.parseDouble(body.get("prix")));
             p.setQte(Integer.parseInt(body.get("qte")));
             p.setUrl(body.get("url"));
