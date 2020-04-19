@@ -24,9 +24,10 @@ public class Product {
 	public Product() {
 	}
 
-	public Product(int idCat, String nom, String description, String unit, String source, String etat, double prix, int qte,
-			String url) {
+	public Product(int idCat, String nom, String description, String unit, String source, String etat, double prix,
+			int qte, String url) {
 		super();
+		this.setId(id);
 		this.setIdCat(idCat);
 		this.setNom(nom);
 		this.setDescription(description);
@@ -124,7 +125,5 @@ public class Product {
 				+ unit + ", source=" + source + ", etat=" + etat + ", prix=" + prix + ", qte=" + qte + ", url=" + url
 				+ "]";
 	}
-
-	
 
 }

@@ -2,14 +2,11 @@ package com.itwins.foreverbio.controllers;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import com.itwins.foreverbio.models.Category;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.itwins.foreverbio.services.CategoryService;
 
@@ -18,40 +15,29 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @PostMapping("Category/add")
-    public String addCategory(@RequestBody Map<String, Object> categoryMap) {
+    @CrossOrigin()
+    @PostMapping("category")
+    public String add(@RequestBody Map<String, Object> categoryMap) {
         Category category = new Category(categoryMap);
         categoryService.saveCategory(category);
 
         return "{" + "category saved successfully." + "}";
     }
 
-    @PostMapping("Category/all")
-    public String findAllCategories() {
-        List<Category> categories = categoryService.findAllCategories();
-        if (categories == null) {
-            return "{" + "An error has occured." + "}";
+    @CrossOrigin()
+    @GetMapping("category")
+    public List<Category> index(@RequestParam(value = "search" , required = false	) String searchText) {
+        if (searchText == null){
+            return categoryService.findAllCategories();
         }
+        return categoryService.findBySearch(searchText);
 
-        String jsonBody = "\"Categories\": [ ";
-        int i = 0;
-        for (Category category : categories) {
 
-            jsonBody += category.toString();
-            if (i != categories.size() - 1) {
-                jsonBody += ",";
-            }
-            i++;
-
-        }
-
-        jsonBody += "]";
-        return jsonBody;
     }
 
-    @GetMapping("Category/delete/{id}")
-    public String deleteCategory(@PathVariable int id) {
-
+    @CrossOrigin()
+    @DeleteMapping("category/{id}")
+    public String delete(@PathVariable int id) {
         if (categoryService.deleteCategory(id)) {
             return "{" + "The Category has been deleted sucessfully" + "}";
         }
@@ -59,27 +45,28 @@ public class CategoryController {
         return " An error has occured. ";
     }
 
-    @GetMapping("Category/{id}")
-    public String getCategory(@PathVariable int id) {
-        Category category = categoryService.findCategory(id);
-        if (category == null) {
-            return "An error has occured. ";		}
-
-
-        return "{ id\": \""
-                + category.getId() + "\"," + "\"libelle\": \"" + category.getNom() + "\"." ;
-    }
-
-
-    @PostMapping("Category/edit")
-    public String editCategory(@RequestBody Map<String, Object> categoryMap) {
-        Category user = new Category(categoryMap);
-        categoryService.saveCategory(user);
-        return "{" + "\"statusCode\": 1," + "\"description\": \"Catgory updated successfully.\"" + "}";
+    @CrossOrigin()
+    @GetMapping("category/{id}")
+    public Optional<Category> getCategory(@PathVariable int id) {
+        return categoryService.findCategory(id);
 
     }
 
+    @CrossOrigin()
+    @PutMapping("category/{id}")
+    public Category update(@PathVariable String id, @RequestBody Map<String, String> body) {
+        int categoryId = Integer.parseInt(id);
+        Optional<Category> category = categoryService.findCategory(categoryId);
 
+        if (category.isPresent()) {
+            Category c = category.get();
+            c.setNom(body.get("nom"));
+            c.setUrl(body.get("url"));
+            c.setDescription(body.get("description"));
+            return categoryService.saveCategory(c);
+        }
+        return null;
+    }
 
 
 }

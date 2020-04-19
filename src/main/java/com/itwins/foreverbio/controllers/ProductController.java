@@ -71,6 +71,7 @@ public class ProductController {
     @CrossOrigin()
     @PostMapping("/product")
     public String create(@RequestBody Map<String, String> body) {
+        //int id = Integer.parseInt(body.get("id"));
         int idCat = Integer.parseInt(body.get("idCat"));
         String nom = body.get("nom");
         String description = body.get("description");
@@ -81,6 +82,7 @@ public class ProductController {
         int qte = Integer.parseInt(body.get("qte"));
         String url = body.get("url");
 
+
         productService.saveProduct(new Product(idCat, nom, description, unit, source, etat, prix, qte, url));
         return ("Produit ajouté.");
     }
@@ -89,6 +91,7 @@ public class ProductController {
     // ! @desc modifies product in database. Body parameters needed :
     // id, nom,description, source, etat, prix, qte
     // ! @access public (for now- it should be accessible by admins only)
+
     @CrossOrigin()
     @PutMapping("/product/{id}")
     public Product update(@PathVariable String id, @RequestBody Map<String, String> body) {
@@ -96,12 +99,10 @@ public class ProductController {
         Optional<Product> product = productService.findById(productId);
         if (product.isPresent()) {
             Product p = product.get();
-            p.setIdCat(Integer.parseInt(body.get("idCat")));
-            p.setNom(body.get("nom"));
-            p.setDescription(body.get("description"));
-            p.setUnit(body.get("unit"));
-            p.setSource(body.get("source"));
-            p.setEtat(body.get("etat"));
+                      
+
+                p.setUnit(body.get("unit"));         p.setS        p.setEtat(body.get("
+
             p.setPrix(Double.parseDouble(body.get("prix")));
             p.setQte(Integer.parseInt(body.get("qte")));
             p.setUrl(body.get("url"));
