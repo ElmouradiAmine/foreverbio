@@ -70,21 +70,21 @@ public class ProductController {
     // ! @access public (for now- it should be accessible by admins only)
     @CrossOrigin()
     @PostMapping("/product")
-
     public String create(@RequestBody Map<String, String> body) {
         //int id = Integer.parseInt(body.get("id"));
         int idCat = Integer.parseInt(body.get("idCat"));
         String nom = body.get("nom");
         String description = body.get("description");
+        String unit = body.get("unit");
         String source = body.get("source");
         String etat = body.get("etat");
         double prix = Double.parseDouble(body.get("prix"));
         int qte = Integer.parseInt(body.get("qte"));
         String url = body.get("url");
 
-        productService.saveProduct(new Product(idCat, nom, description, source, etat, prix, qte, url));
-        return ("Produit ajouté.");
 
+        productService.saveProduct(new Product(idCat, nom, description, unit, source, etat, prix, qte, url));
+        return ("Produit ajouté.");
     }
 
     // ! @route PUT /product/id
@@ -99,10 +99,9 @@ public class ProductController {
         Optional<Product> product = productService.findById(productId);
         if (product.isPresent()) {
             Product p = product.get();
-            p.setIdCat(Integer.parseInt(body.get("idCat")));
-            p.setNom(body.get("nom"));
+            p.setUnit(body.get("unit"));    
             p.setDescription(body.get("description"));
-            p.setSource(body.get("source"));
+            p.setSource(body.get("source"));        
             p.setEtat(body.get("etat"));
             p.setPrix(Double.parseDouble(body.get("prix")));
             p.setQte(Integer.parseInt(body.get("qte")));
