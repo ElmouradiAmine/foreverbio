@@ -80,10 +80,11 @@ public class ProductController {
         String etat = body.get("etat");
         double prix = Double.parseDouble(body.get("prix"));
         int qte = Integer.parseInt(body.get("qte"));
+        int nbVentes = Integer.parseInt(body.get("nbVentes"));
         String url = body.get("url");
 
 
-        productService.saveProduct(new Product(idCat, nom, description, unit, source, etat, prix, qte, url));
+        productService.saveProduct(new Product(idCat, nom, description, unit, source, etat, prix, qte, nbVentes, url));
         return ("Produit ajouté.");
     }
 
@@ -105,6 +106,7 @@ public class ProductController {
             p.setEtat(body.get("etat"));
             p.setPrix(Double.parseDouble(body.get("prix")));
             p.setQte(Integer.parseInt(body.get("qte")));
+            p.setNbVentes(Integer.parseInt(body.get("nbVentes")));
             p.setUrl(body.get("url"));
 
             return productService.saveProduct(p);
