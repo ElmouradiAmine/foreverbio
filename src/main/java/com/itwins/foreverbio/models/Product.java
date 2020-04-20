@@ -26,11 +26,7 @@ public class Product {
 	}
 
 	public Product(int idCat, String nom, String description, String unit, String source, String etat, double prix,
-<<<<<<< HEAD
 			int qte, int nbVentes, String url) {
-=======
-			int qte, String url) {
->>>>>>> 253785dddf54d9c99123e0e4a736062154767339
 		super();
 		this.setId(id);
 		this.setIdCat(idCat);
@@ -137,13 +133,9 @@ public class Product {
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", idCat=" + idCat + ", nom=" + nom + ", description=" + description + ", unit="
-<<<<<<< HEAD
 				+ unit + ", source=" + source + ", etat=" + etat + ", prix=" + prix + ", qte=" + qte + ", nbVentes="
 				+ nbVentes + ", url=" + url + "]";
-=======
-				+ unit + ", source=" + source + ", etat=" + etat + ", prix=" + prix + ", qte=" + qte + ", url=" + url
-				+ "]";
->>>>>>> 253785dddf54d9c99123e0e4a736062154767339
+
 	}
 
 }
