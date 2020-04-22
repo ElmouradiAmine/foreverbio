@@ -1,5 +1,7 @@
 package com.itwins.foreverbio.models;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
@@ -15,20 +17,45 @@ import javax.persistence.Table;
 public class User {
 	
 	@Id
+
 	private int id;
+	@JsonView(View.Commandes.class)
 	private String email;
+	@JsonView(View.Commandes.class)
+
 	private String firstName;
+	@JsonView(View.Commandes.class)
+
 	private String lastName;
+	@JsonView(View.Commandes.class)
+
 	private String birthDate;
 	private String password;
+
 	private String role;
 	@Column(length = 1024)
+	@JsonView(View.Commandes.class)
 	private String url;
 	@Column(length = 256)
 	private String creationDate;
-	
+
+	public User(int id, String email, String firstName, String lastName, String birthDate, String password, String role, String url, String creationDate) {
+		this.id = id;
+		this.email = email;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.birthDate = birthDate;
+		this.password = password;
+		this.role = role;
+		this.url = url;
+		this.creationDate = creationDate;
+	}
+
 	public User() {
 		super();
+	}
+	public User(int id) {
+		this.id = id;
 	}
 
 	public String getBirthDate() {
