@@ -18,8 +18,6 @@ public interface PanierRepository extends JpaRepository<Panier,Integer> {
     void delete(Panier panier);
     public Panier findById(int id);
     List<Panier> findByPrixGreaterThan(int prixLimit);
-    @Query("SELECT id, nom, prix , quantite FROM Panier  WHERE quantite > :quantiteLimit")
-    List<Panier>  chercherUnProduitCher(@Param("quantiteLimit") int prix);
-
-
+ /*   @Query("SELECT id, nom, prix , quantite FROM Panier  WHERE quantite > :quantiteLimit")
+    List<Panier>  chercherUnProduitCher(@Param("quantiteLimit") int prix);*/
 }

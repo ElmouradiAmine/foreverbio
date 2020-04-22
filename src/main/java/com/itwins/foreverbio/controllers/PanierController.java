@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import java.net.URI;
 import java.util.List;
 
@@ -28,22 +27,26 @@ public class PanierController {
      * d'en fabriquer une instance. ProductDao a désormais accès à toutes
      * les méthodes que nous avons définies.
      */
+
     @Autowired
     private PanierRepository PanierRepository;
 
     //Recuperer la liste des produits
+    @CrossOrigin
     @RequestMapping(value="/Panier",method=RequestMethod.GET)
     public  List<Panier> listeProduits(){
         return PanierRepository.findAll();
     }
     //Recuperer un produit par son Id
     //on peut aussi utiliser   @GetMapping(value = "/Produits/{id}")
-    @RequestMapping(value="/Panier/{id}",method=RequestMethod.GET)
+    @CrossOrigin
+    @RequestMapping(value="/Panier/{id}",method=RequestMethod.GET)  
     //@GetMapping()
     public Panier afficherUnProduit(@PathVariable int id){
         return PanierRepository.findById(id);
 
     }
+    @CrossOrigin
     @PostMapping(value="/Panier")
     public ResponseEntity<Void> ajouterProduit(@RequestBody Panier panier)
     {
@@ -53,22 +56,23 @@ public class PanierController {
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(panierAdded.getId())
+                .buildAndExpand(panierAdded.getidUser())
                 .toUri();
         return ResponseEntity.created(location).build();
     }
+    @CrossOrigin
     @GetMapping(value = "test/Panier/{prixLimit}")
     public List<Panier> testeDeRequetes(@PathVariable int prixLimit) {
         return PanierRepository.findByPrixGreaterThan(prixLimit);
     }
+    @CrossOrigin
     @DeleteMapping (value = "/Panier/{id}")
     public void supprimerPrduit(@PathVariable int id) {
-
         PanierRepository.delete(PanierRepository.findById(id));
     }
+    @CrossOrigin
     @PutMapping (value = "/Panier")
     public void updateProduit(@RequestBody Panier panier) {
-
         PanierRepository.save(panier);
     }
 }

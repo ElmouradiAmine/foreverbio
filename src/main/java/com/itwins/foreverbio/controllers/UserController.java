@@ -25,9 +25,7 @@ public class UserController {
 			return userService.findAll();
 		}
 		return userService.findByEmailContaining(searchText);
-
 	}
-
 	@GetMapping("/user/{id}")
 	public Optional<User> userById(@PathVariable String id) {
 		int userId = Integer.parseInt(id);
