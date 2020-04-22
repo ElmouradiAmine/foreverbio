@@ -1,34 +1,57 @@
 package com.itwins.foreverbio.models;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="products")
+@Table(name = "products")
 public class Product {
 	@Id
 	private int id;
+	@Column(name = "id_cat")
+	@JsonView(View.Commandes.class)
+	private int idCat;
+	@JsonView(View.Commandes.class)
+
 	private String nom;
+	@JsonView(View.Commandes.class)
+
 	private String description;
-	String source;
-	String etat;
-	double prix;
-	int qte;
-	
+	private String unit;
+	@JsonView(View.Commandes.class)
+
+	private String source;
+	private String etat;
+	@JsonView(View.Commandes.class)
+
+	private double prix;
+	private int qte;
+	private String url;
+
 	public Product() {
-		
 	}
 
-	public Product(int id, String nom, String description, String source, String etat, double prix, int qte) {
+	public Product(int id){
+		this.id = id;
+	}
+
+	public Product(int idCat, String nom, String description, String unit, String source, String etat, double prix,
+			int qte, String url) {
 		super();
 		this.setId(id);
+		this.setIdCat(idCat);
 		this.setNom(nom);
 		this.setDescription(description);
+		this.setUnit(unit);
 		this.setSource(source);
 		this.setEtat(etat);
 		this.setPrix(prix);
 		this.setQte(qte);
+		this.setUrl(url);
 	}
 
 	public int getId() {
@@ -37,6 +60,14 @@ public class Product {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getIdCat() {
+		return idCat;
+	}
+
+	public void setIdCat(int idCat) {
+		this.idCat = idCat;
 	}
 
 	public String getNom() {
@@ -53,6 +84,14 @@ public class Product {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
 	}
 
 	public String getSource() {
@@ -87,15 +126,19 @@ public class Product {
 		this.qte = qte;
 	}
 
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", nom=" + nom + ", description=" + description + ", source=" + source + ", etat="
-				+ etat + ", prix=" + prix + ", qte=" + qte + "]";
+		return "Product [id=" + id + ", idCat=" + idCat + ", nom=" + nom + ", description=" + description + ", unit="
+				+ unit + ", source=" + source + ", etat=" + etat + ", prix=" + prix + ", qte=" + qte + ", url=" + url
+				+ "]";
 	}
-	
-	
-	
-	
-	
 
 }

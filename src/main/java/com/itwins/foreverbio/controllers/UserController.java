@@ -13,47 +13,48 @@ import com.itwins.foreverbio.services.UserService;
 @RestController
 public class UserController {
 
+
 	@Autowired
 	private UserService userService;
 
 	// ! @route GET /user?search=amine
 	// ! @desc returns all users, and search by email if search param provided
 	// ! @access public
+	@CrossOrigin()
 	@GetMapping("/user")
 	public List<User> index(@RequestParam(value = "search" , required = false	) String searchText) {
 		if (searchText == null){
 			return userService.findAll();
 		}
-		return userService.findByEmailContaining(searchText);
+		return userService.findBySearch(searchText);
+
 	}
+	@CrossOrigin()
 	@GetMapping("/user/{id}")
 	public Optional<User> userById(@PathVariable String id) {
 		int userId = Integer.parseInt(id);
 		return userService.findById(userId);
 	}
-
 	// ! @route POST /user
 	// ! @desc create a new user in database. Body parameters needed :
 	// email, firstname, lastname, age, password, role
 	// ! @access public
-
+	@CrossOrigin()
 	@PostMapping("/user")
-	public User create(@RequestBody Map<String, Object> userMap) {
+	public String create(@RequestBody Map<String, Object> userMap) {
+		System.out.println(userMap);
 		User user = new User(userMap);
-		return userService.saveUser(user);
+		userService.saveUser(user);
+		return "Utilisateur ajouté";
 
 	}
 
-	@PostMapping("/user/login")
-	public Optional<User> login(@RequestBody Map<String, Object> userMap) {
-		return userService.findUserByEmailAndPassword((String)userMap.get("email"),(String)userMap.get("password"));
-
-	}
 
 	// ! @route PUT /user/id
 	// ! @desc modifies user in database. Body parameters needed :
 	// email, firstname, lastname, age, password, role
 	// ! @access public
+	@CrossOrigin()
 	@PutMapping("/user/{id}")
 	public User update(@PathVariable String id, @RequestBody Map<String, String> body) {
 		int userId = Integer.parseInt(id);
@@ -61,10 +62,11 @@ public class UserController {
 		if (user.isPresent()) {
 			User u = user.get();
 			u.setEmail(body.get("email"));
-			u.setFirstName(body.get("firstname"));
-			u.setAge(Integer.parseInt(body.get("age")));
-			u.setLastName(body.get("lastname"));
+			u.setFirstName(body.get("firstName"));
+			u.setLastName(body.get("lastName"));
 			u.setPassword(body.get("password"));
+			u.setBirthDate(body.get("birthDate"));
+			u.setUrl(body.get("url"));
 			u.setRole(body.get("role"));
 			return userService.saveUser(u);
 		}
@@ -75,10 +77,22 @@ public class UserController {
 	// ! @route DELETE /user/id
 	// ! @desc deletes user with param id
 	// ! @access public
+	@CrossOrigin()
 	@DeleteMapping("user/{id}")
 	public boolean delete(@PathVariable String id) {
 		int userId = Integer.parseInt(id);
 		return userService.deleteById(userId);
+	}
+
+	@PostMapping("/signIn")
+	public String signIn(@RequestBody Map<String, Object> userInfo) {
+		Optional<User> user = userService.findUserByEmailAndPassword(userInfo.get("email").toString(),
+				userInfo.get("password").toString());
+		if (user.isPresent()) {
+			return "authentification réussite";
+		}
+		return "email or password not correct";
+
 	}
 
 
