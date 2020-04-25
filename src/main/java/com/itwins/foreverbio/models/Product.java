@@ -22,15 +22,13 @@ public class Product {
 
 	private String description;
 	private String unit;
-	@JsonView(View.Commandes.class)
 
-	private String source;
-	private String etat;
-	@JsonView(View.Commandes.class)
-
-	private double prix;
-	private int qte;
-	private String url;
+	String source;
+	String etat;
+	double prix;
+	int qte;
+	int nbVentes;
+	String url;
 
 	public Product() {
 	}
@@ -40,7 +38,7 @@ public class Product {
 	}
 
 	public Product(int idCat, String nom, String description, String unit, String source, String etat, double prix,
-			int qte, String url) {
+			int qte, int nbVentes, String url) {
 		super();
 		this.setId(id);
 		this.setIdCat(idCat);
@@ -51,6 +49,7 @@ public class Product {
 		this.setEtat(etat);
 		this.setPrix(prix);
 		this.setQte(qte);
+		this.setNbVentes(nbVentes);
 		this.setUrl(url);
 	}
 
@@ -126,6 +125,14 @@ public class Product {
 		this.qte = qte;
 	}
 
+	public int getNbVentes() {
+		return nbVentes;
+	}
+
+	public void setNbVentes(int nbVentes) {
+		this.nbVentes = nbVentes;
+	}
+
 	public String getUrl() {
 		return url;
 	}
@@ -137,8 +144,9 @@ public class Product {
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", idCat=" + idCat + ", nom=" + nom + ", description=" + description + ", unit="
-				+ unit + ", source=" + source + ", etat=" + etat + ", prix=" + prix + ", qte=" + qte + ", url=" + url
-				+ "]";
+				+ unit + ", source=" + source + ", etat=" + etat + ", prix=" + prix + ", qte=" + qte + ", nbVentes="
+				+ nbVentes + ", url=" + url + "]";
+
 	}
 
 }
