@@ -22,13 +22,17 @@ public class Product {
 
 	private String description;
 	private String unit;
+	@JsonView(View.Commandes.class)
 
-	String source;
-	String etat;
-	double prix;
-	int qte;
-	int nbVentes;
-	String url;
+	private String source;
+	private String etat;
+	@JsonView(View.Commandes.class)
+
+	private double prix;
+	private int qte;
+	@JsonView(View.Commandes.class)
+
+	private String url;
 
 	public Product() {
 	}

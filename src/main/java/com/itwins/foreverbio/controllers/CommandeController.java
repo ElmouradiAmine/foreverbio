@@ -31,6 +31,8 @@ public class CommandeController {
 
     @JsonView(View.Commandes.class)
     @PostMapping("/users/{userId}/commandes")
+    @CrossOrigin()
+
     public Commande addCommande(@RequestBody Map<String,Object> map, @PathVariable int userId){
         Commande commande = new Commande(map);
         User user = userService.findById(userId).get();
@@ -60,6 +62,8 @@ public class CommandeController {
     }
     @JsonView(View.Commandes.class)
     @GetMapping("commandes")
+    @CrossOrigin()
+
     public List<Commande> getAllCommandes(){
 
         List<Commande> commandes =  commandeService.getAllCommandes();
@@ -74,6 +78,9 @@ public class CommandeController {
 
     @JsonView(View.Commandes.class)
     @GetMapping("/users/{userId}/commandes")
+
+    @CrossOrigin()
+
     public List<Commande> getCommandeByUser(@PathVariable int userId){
         List<Commande> listCommande = commandeService.getCommandesByUserId(userId);
         listCommande.forEach((commande) -> {
@@ -86,6 +93,9 @@ public class CommandeController {
 
     @JsonView(View.Commandes.class)
     @PutMapping("commandes/{commandeId}")
+
+    @CrossOrigin()
+
     public Commande updateCommande(@PathVariable int commandeId, @RequestParam(value = "state" , required = false	) String state){
         Commande commande = commandeService.findById(commandeId).get();
         commande.setState(state);
@@ -96,6 +106,9 @@ public class CommandeController {
     }
 
     @DeleteMapping("commandes/{commandeId}")
+
+    @CrossOrigin()
+
     public void deleteCommande(@PathVariable int commandeId){
         commandeService.deleteById(commandeId);
     }
