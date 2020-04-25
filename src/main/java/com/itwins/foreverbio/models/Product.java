@@ -30,6 +30,8 @@ public class Product {
 
 	private double prix;
 	private int qte;
+	@JsonView(View.Commandes.class)
+
 	private String url;
 
 	public Product() {
