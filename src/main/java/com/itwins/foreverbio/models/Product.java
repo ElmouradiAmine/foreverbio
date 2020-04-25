@@ -1,5 +1,7 @@
 package com.itwins.foreverbio.models;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -11,10 +13,16 @@ public class Product {
 	@Id
 	private int id;
 	@Column(name = "id_cat")
+	@JsonView(View.Commandes.class)
 	private int idCat;
+	@JsonView(View.Commandes.class)
+
 	private String nom;
+	@JsonView(View.Commandes.class)
+
 	private String description;
 	private String unit;
+
 	String source;
 	String etat;
 	double prix;
@@ -23,6 +31,10 @@ public class Product {
 	String url;
 
 	public Product() {
+	}
+
+	public Product(int id){
+		this.id = id;
 	}
 
 	public Product(int idCat, String nom, String description, String unit, String source, String etat, double prix,
