@@ -33,11 +33,12 @@ public class Product {
 	@JsonView(View.Commandes.class)
 
 	private String url;
+	private int nbVentes;
 
 	public Product() {
 	}
 
-	public Product(int id){
+	public Product(int id) {
 		this.id = id;
 	}
 
