@@ -22,7 +22,6 @@ public class Product {
 
 	private String description;
 	private String unit;
-  
 	@JsonView(View.Commandes.class)
 
 	private String source;
@@ -32,10 +31,11 @@ public class Product {
 	private double prix;
 	private int qte;
 	@JsonView(View.Commandes.class)
-	int nbVentes;
-	@JsonView(View.Commandes.class)
-	private String url;
+
 	private int nbVentes;
+	@JsonView(View.Commandes.class)
+
+	private String url;
 
 	public Product() {
 	}
@@ -130,15 +130,6 @@ public class Product {
 
 	public void setQte(int qte) {
 		this.qte = qte;
-	}
-	
-
-	public int getNbVentes() {
-		return nbVentes;
-	}
-
-	public void setNbVentes(int nbVentes) {
-		this.nbVentes = nbVentes;
 	}
 
 	public int getNbVentes() {
