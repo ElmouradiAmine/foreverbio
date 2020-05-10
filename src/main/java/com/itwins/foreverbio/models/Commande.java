@@ -27,7 +27,9 @@ public class Commande {
     @JsonView(View.Commandes.class)
 
     private String state;
-
+    @JsonView(View.Commandes.class)
+    
+    private int idLivreur;
     @JsonView(View.Commandes.class)
 
     @ManyToOne
@@ -70,16 +72,18 @@ public class Commande {
         this.date =  formatter.format(today);
         this.paymentMethod = (String) map.get("paymentMethod");
         this.state = "En attente";
+        this.idLivreur = (Integer) null;
     }
     public Commande(int id) {
         this.id = id;
     }
 
-    public Commande(int id, String date, int userId) {
+    public Commande(int id, String date, int userId, int idLivreur) {
         this.id = id;
         this.date = date;
         this.paymentMethod = paymentMethod;
         this.state = state;
+        this.idLivreur = idLivreur;
         this.user = new User(userId,"","","","","","","","");
     }
 
@@ -99,7 +103,15 @@ public class Commande {
         this.date = date;
     }
 
-    public User getUser() {
+    public int getIdLivreur() {
+		return idLivreur;
+	}
+
+	public void setIdLivreur(int idLivreur) {
+		this.idLivreur = idLivreur;
+	}
+
+	public User getUser() {
         return user;
     }
 

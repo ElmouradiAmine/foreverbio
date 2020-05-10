@@ -95,10 +95,10 @@ public class CommandeController {
     @PutMapping("commandes/{commandeId}")
 
     @CrossOrigin()
-
-    public Commande updateCommande(@PathVariable int commandeId, @RequestParam(value = "state" , required = false	) String state){
+    public Commande updateCommande(@PathVariable int commandeId, @RequestParam(value = "state" , required = false	) String state,@RequestParam(value = "idLivreur" , required = false	) int idLivreur){
         Commande commande = commandeService.findById(commandeId).get();
         commande.setState(state);
+        commande.setIdLivreur(idLivreur);
         commandeService.addCommande(commande);
         List<LigneCommande> listLigneCommande = ligneCommandeService.getLigneCommandesByCommandeId(commande.getId());
         commande.setListLigneCommande(listLigneCommande);
