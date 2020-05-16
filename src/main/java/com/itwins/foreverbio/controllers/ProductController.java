@@ -104,9 +104,9 @@ public class ProductController {
             p.setSource(body.get("source"));
             p.setEtat(body.get("etat"));
             p.setPrix(Double.parseDouble(body.get("prix")));
-            p.setQte(Integer.parseInt(body.get("qte")));
-            if(body.get("nbVentes") == null) {
-            	p.setNbVentes(Integer.parseInt(body.get("nbVentes")));
+            if (body.get("nbVentes") != null) {
+                p.setNbVentes(Integer.parseInt(body.get("nbVentes")));
+
             }
             p.setUrl(body.get("url"));
 
