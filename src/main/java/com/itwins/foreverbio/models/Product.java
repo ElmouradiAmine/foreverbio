@@ -43,6 +43,21 @@ public class Product {
 	public Product(int id) {
 		this.id = id;
 	}
+	
+
+	public Product(int idCat, String nom, String description, String unit, String source, String etat, double prix,
+			int qte, String url) {
+		super();
+		this.idCat = idCat;
+		this.nom = nom;
+		this.description = description;
+		this.unit = unit;
+		this.source = source;
+		this.etat = etat;
+		this.prix = prix;
+		this.qte = qte;
+		this.url = url;
+	}
 
 	public Product(int idCat, String nom, String description, String unit, String source, String etat, double prix,
 			int qte, int nbVentes, String url) {
