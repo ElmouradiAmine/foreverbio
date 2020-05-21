@@ -84,14 +84,15 @@ public class UserController {
 		return userService.deleteById(userId);
 	}
 
+	@CrossOrigin()
 	@PostMapping("/signIn")
-	public String signIn(@RequestBody Map<String, Object> userInfo) {
+	public User signIn(@RequestBody Map<String, Object> userInfo) {
 		Optional<User> user = userService.findUserByEmailAndPassword(userInfo.get("email").toString(),
 				userInfo.get("password").toString());
 		if (user.isPresent()) {
-			return "authentification réussite";
+			return user.get() ;
 		}
-		return "email or password not correct";
+		return null;
 
 	}
 
