@@ -1,6 +1,5 @@
 package com.itwins.foreverbio.models;
 
-
 import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
@@ -15,7 +14,8 @@ import java.util.Map;
 
 public class Commande {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @JsonView(View.Commandes.class)
     private int id;
     @JsonView(View.Commandes.class)
@@ -28,7 +28,7 @@ public class Commande {
 
     private String state;
     @JsonView(View.Commandes.class)
-    
+
     private int idLivreur;
     @JsonView(View.Commandes.class)
 
@@ -37,7 +37,6 @@ public class Commande {
     @JsonView(View.Commandes.class)
     @OneToMany
     private List<LigneCommande> listLigneCommande;
-
 
     public String getPaymentMethod() {
         return paymentMethod;
@@ -63,17 +62,17 @@ public class Commande {
         this.listLigneCommande = listLigneCommande;
     }
 
-
     public Commande() {
     }
+
     public Commande(Map<String, Object> map) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime today = LocalDateTime.now();
-        this.date =  formatter.format(today);
+        this.date = formatter.format(today);
         this.paymentMethod = (String) map.get("paymentMethod");
         this.state = "En attente";
-        this.idLivreur = (Integer) null;
     }
+
     public Commande(int id) {
         this.id = id;
     }
@@ -84,7 +83,7 @@ public class Commande {
         this.paymentMethod = paymentMethod;
         this.state = state;
         this.idLivreur = idLivreur;
-        this.user = new User(userId,"","","","","","","","");
+        this.user = new User(userId, "", "", "", "", "", "", "", "");
     }
 
     public int getId() {
@@ -104,14 +103,14 @@ public class Commande {
     }
 
     public int getIdLivreur() {
-		return idLivreur;
-	}
+        return idLivreur;
+    }
 
-	public void setIdLivreur(int idLivreur) {
-		this.idLivreur = idLivreur;
-	}
+    public void setIdLivreur(int idLivreur) {
+        this.idLivreur = idLivreur;
+    }
 
-	public User getUser() {
+    public User getUser() {
         return user;
     }
 
@@ -129,5 +128,3 @@ public class Commande {
         }));
     }
 }
-
-
