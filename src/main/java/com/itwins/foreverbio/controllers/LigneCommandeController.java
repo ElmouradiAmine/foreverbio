@@ -7,10 +7,7 @@ import com.itwins.foreverbio.models.Product;
 import com.itwins.foreverbio.services.LigneCommandeService;
 import com.itwins.foreverbio.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -21,7 +18,7 @@ public class LigneCommandeController {
     @Autowired
     private ProductService productService;
 
-
+    @CrossOrigin
     @PostMapping("/commandes/{commandeId}/ligneCommande/{productId}")
     public LigneCommande addLigneCommande(@RequestBody LigneCommande ligneCommande, @PathVariable int commandeId, @PathVariable int productId){
         ligneCommande.setCommande(new Commande(commandeId));

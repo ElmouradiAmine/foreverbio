@@ -28,7 +28,7 @@ public class CommandeController {
     @Autowired
     private ProductService productService;
 
-
+    @CrossOrigin
     @JsonView(View.Commandes.class)
     @PostMapping("/users/{userId}/commandes")
     @CrossOrigin()
@@ -60,6 +60,7 @@ public class CommandeController {
 
 
     }
+    @CrossOrigin
     @JsonView(View.Commandes.class)
     @GetMapping("commandes")
     @CrossOrigin()
@@ -75,7 +76,7 @@ public class CommandeController {
 
         return commandes;
     }
-
+    @CrossOrigin
     @JsonView(View.Commandes.class)
     @GetMapping("/users/{userId}/commandes")
 
@@ -90,7 +91,7 @@ public class CommandeController {
         });
         return listCommande;
     }
-
+    @CrossOrigin
     @JsonView(View.Commandes.class)
     @PutMapping("commandes/{commandeId}")
 
@@ -104,7 +105,7 @@ public class CommandeController {
         commande.setListLigneCommande(listLigneCommande);
         return commande;
     }
-
+    @CrossOrigin
     @DeleteMapping("commandes/{commandeId}")
 
     @CrossOrigin()
