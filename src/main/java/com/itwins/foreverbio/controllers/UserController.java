@@ -89,8 +89,7 @@ public class UserController {
 		Optional<User> user = userService.findUserByEmailAndPassword(userInfo.get("email").toString(),
 				userInfo.get("password").toString());
 		if (user.isPresent()) {
-			return user.get() ;
-
+			return user.get();
 		}
 		return null;
 

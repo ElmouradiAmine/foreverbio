@@ -1,6 +1,5 @@
 package com.itwins.foreverbio.controllers;
 
-
 import com.fasterxml.jackson.annotation.JsonView;
 import com.itwins.foreverbio.models.*;
 import com.itwins.foreverbio.services.CommandeService;
@@ -28,12 +27,11 @@ public class CommandeController {
     @Autowired
     private ProductService productService;
 
-
     @JsonView(View.Commandes.class)
     @PostMapping("/users/{userId}/commandes")
     @CrossOrigin()
 
-    public Commande addCommande(@RequestBody Map<String,Object> map, @PathVariable int userId){
+    public Commande addCommande(@RequestBody Map<String, Object> map, @PathVariable int userId) {
         Commande commande = new Commande(map);
         User user = userService.findById(userId).get();
         commande.setUser(user);
@@ -41,35 +39,36 @@ public class CommandeController {
 
         List list = (ArrayList) map.get("listLigneCommande");
         List<LigneCommande> listLigneCommande = new ArrayList();
-        if (list!= null){
+        if (list != null) {
             list.forEach((m) -> {
-               LigneCommande ligneCommande = new LigneCommande((Map<String,Object>) m);
-               Product product = productService.findById((int)((Map<String,Object>) m).get("idProduit")).get();
-               ligneCommande.setProduct(product);
-               ligneCommande.setCommande(commande);
-               ligneCommande.setTotal();
-               ligneCommandeService.addLigneCommande(ligneCommande);
-               listLigneCommande.add(ligneCommande);
+                LigneCommande ligneCommande = new LigneCommande((Map<String, Object>) m);
+                Product product = productService.findById((int) ((Map<String, Object>) m).get("idProduit")).get();
+                ligneCommande.setProduct(product);
+                ligneCommande.setCommande(commande);
+                ligneCommande.setTotal();
+                ligneCommandeService.addLigneCommande(ligneCommande);
+                listLigneCommande.add(ligneCommande);
             });
         }
 
         commande.setListLigneCommande(listLigneCommande);
         commande.setTotal();
         commandeService.addCommande(commande);
-        return  commande;
-
+        return commande;
 
     }
+
     @JsonView(View.Commandes.class)
     @GetMapping("commandes")
     @CrossOrigin()
 
-    public List<Commande> getAllCommandes(){
+    public List<Commande> getAllCommandes() {
 
-        List<Commande> commandes =  commandeService.getAllCommandes();
+        List<Commande> commandes = commandeService.getAllCommandes();
 
         commandes.forEach((commande -> {
-            List<LigneCommande> listLigneCommande = ligneCommandeService.getLigneCommandesByCommandeId(commande.getId());
+            List<LigneCommande> listLigneCommande = ligneCommandeService
+                    .getLigneCommandesByCommandeId(commande.getId());
             commande.setListLigneCommande(listLigneCommande);
         }));
 
@@ -81,10 +80,11 @@ public class CommandeController {
 
     @CrossOrigin()
 
-    public List<Commande> getCommandeByUser(@PathVariable int userId){
+    public List<Commande> getCommandeByUser(@PathVariable int userId) {
         List<Commande> listCommande = commandeService.getCommandesByUserId(userId);
         listCommande.forEach((commande) -> {
-            List<LigneCommande> listLigneCommande = ligneCommandeService.getLigneCommandesByCommandeId(commande.getId());
+            List<LigneCommande> listLigneCommande = ligneCommandeService
+                    .getLigneCommandesByCommandeId(commande.getId());
             commande.setListLigneCommande(listLigneCommande);
 
         });
@@ -95,7 +95,9 @@ public class CommandeController {
     @PutMapping("commandes/{commandeId}")
 
     @CrossOrigin()
-    public Commande updateCommande(@PathVariable int commandeId, @RequestParam(value = "state" , required = false	) String state,@RequestParam(value = "idLivreur" , required = false	) int idLivreur){
+    public Commande updateCommande(@PathVariable int commandeId,
+            @RequestParam(value = "state", required = false) String state,
+            @RequestParam(value = "idLivreur", required = false) int idLivreur) {
         Commande commande = commandeService.findById(commandeId).get();
         commande.setState(state);
         commande.setIdLivreur(idLivreur);
@@ -109,7 +111,7 @@ public class CommandeController {
 
     @CrossOrigin()
 
-    public void deleteCommande(@PathVariable int commandeId){
+    public void deleteCommande(@PathVariable int commandeId) {
         commandeService.deleteById(commandeId);
     }
 }
