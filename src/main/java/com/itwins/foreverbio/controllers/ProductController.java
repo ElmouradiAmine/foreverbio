@@ -71,7 +71,7 @@ public class ProductController {
     @CrossOrigin()
     @PostMapping("/product")
     public String create(@RequestBody Map<String, String> body) {
-        //int id = Integer.parseInt(body.get("id"));
+        // int id = Integer.parseInt(body.get("id"));
         int idCat = Integer.parseInt(body.get("idCat"));
         String nom = body.get("nom");
         String description = body.get("description");
@@ -82,8 +82,8 @@ public class ProductController {
         int qte = Integer.parseInt(body.get("qte"));
         String url = body.get("url");
 
-
         productService.saveProduct(new Product(idCat, nom, description, unit, source, etat, prix, qte, url));
+
         return ("Produit ajouté.");
     }
 
@@ -99,12 +99,15 @@ public class ProductController {
         Optional<Product> product = productService.findById(productId);
         if (product.isPresent()) {
             Product p = product.get();
-            p.setUnit(body.get("unit"));    
+            p.setUnit(body.get("unit"));
             p.setDescription(body.get("description"));
-            p.setSource(body.get("source"));        
+            p.setSource(body.get("source"));
             p.setEtat(body.get("etat"));
             p.setPrix(Double.parseDouble(body.get("prix")));
-            p.setQte(Integer.parseInt(body.get("qte")));
+            if (body.get("nbVentes") != null) {
+                p.setNbVentes(Integer.parseInt(body.get("nbVentes")));
+
+            }
             p.setUrl(body.get("url"));
 
             return productService.saveProduct(p);
