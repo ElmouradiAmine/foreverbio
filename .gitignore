@@ -1,4 +1,4 @@
-src/main/resources/application.properties
+src/main/java/com/itwins/foreverbio/resources/application.properties
 
 HELP.md
 target/
