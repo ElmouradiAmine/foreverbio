@@ -28,7 +28,7 @@ public class CommandeController {
     @Autowired
     private ProductService productService;
 
-
+    @CrossOrigin
     @JsonView(View.Commandes.class)
     @PostMapping("/users/{userId}/commandes")
     public Commande addCommande(@RequestBody Map<String,Object> map, @PathVariable int userId){
@@ -58,6 +58,7 @@ public class CommandeController {
 
 
     }
+    @CrossOrigin
     @JsonView(View.Commandes.class)
     @GetMapping("commandes")
     public List<Commande> getAllCommandes(){
@@ -71,7 +72,7 @@ public class CommandeController {
 
         return commandes;
     }
-
+    @CrossOrigin
     @JsonView(View.Commandes.class)
     @GetMapping("/users/{userId}/commandes")
     public List<Commande> getCommandeByUser(@PathVariable int userId){
@@ -83,7 +84,7 @@ public class CommandeController {
         });
         return listCommande;
     }
-
+    @CrossOrigin
     @JsonView(View.Commandes.class)
     @PutMapping("commandes/{commandeId}")
     public Commande updateCommande(@PathVariable int commandeId, @RequestParam(value = "state" , required = false	) String state){
@@ -94,7 +95,7 @@ public class CommandeController {
         commande.setListLigneCommande(listLigneCommande);
         return commande;
     }
-
+    @CrossOrigin
     @DeleteMapping("commandes/{commandeId}")
     public void deleteCommande(@PathVariable int commandeId){
         commandeService.deleteById(commandeId);
