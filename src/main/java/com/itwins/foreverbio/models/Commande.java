@@ -72,7 +72,6 @@ public class Commande {
         this.date =  formatter.format(today);
         this.paymentMethod = (String) map.get("paymentMethod");
         this.state = "En attente";
-        this.idLivreur = (Integer) null;
     }
     public Commande(int id) {
         this.id = id;

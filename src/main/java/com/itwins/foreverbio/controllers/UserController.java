@@ -13,7 +13,6 @@ import com.itwins.foreverbio.services.UserService;
 @RestController
 public class UserController {
 
-
 	@Autowired
 	private UserService userService;
 
@@ -22,19 +21,21 @@ public class UserController {
 	// ! @access public
 	@CrossOrigin()
 	@GetMapping("/user")
-	public List<User> index(@RequestParam(value = "search" , required = false	) String searchText) {
-		if (searchText == null){
+	public List<User> index(@RequestParam(value = "search", required = false) String searchText) {
+		if (searchText == null) {
 			return userService.findAll();
 		}
 		return userService.findBySearch(searchText);
 
 	}
+
 	@CrossOrigin()
 	@GetMapping("/user/{id}")
 	public Optional<User> userById(@PathVariable String id) {
 		int userId = Integer.parseInt(id);
 		return userService.findById(userId);
 	}
+
 	// ! @route POST /user
 	// ! @desc create a new user in database. Body parameters needed :
 	// email, firstname, lastname, age, password, role
@@ -48,7 +49,6 @@ public class UserController {
 		return "Utilisateur ajouté";
 
 	}
-
 
 	// ! @route PUT /user/id
 	// ! @desc modifies user in database. Body parameters needed :
@@ -73,7 +73,6 @@ public class UserController {
 		return null;
 	}
 
-
 	// ! @route DELETE /user/id
 	// ! @desc deletes user with param id
 	// ! @access public
@@ -91,10 +90,10 @@ public class UserController {
 				userInfo.get("password").toString());
 		if (user.isPresent()) {
 			return user.get() ;
+
 		}
 		return null;
 
 	}
-
 
 }
